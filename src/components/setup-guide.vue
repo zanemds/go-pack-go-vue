@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-  <div>Hello</div>
+  <div>Hello, this is the setup page</div>
   <button @click="clickHandler">Hello Button</button>
 </template>
 
