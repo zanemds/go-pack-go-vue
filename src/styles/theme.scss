@@ -1,0 +1,23 @@
+$primary-color: #49043B;
+$secondary-color: #0A4451;
+$foreground-color: #b5b5b5;
+$background-color: #1d1d1d;
+
+.workspace {
+    background-color: $background-color;
+    color: $foreground-color;
+}
+
+button {
+    &[outline]{
+        background: transparent;
+        border-color: $primary-color;
+        background-color: transparent;
+        color: $foreground-color;
+    }
+    &[solid]{
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: $foreground-color;
+    }
+}

@@ -1,4 +1,5 @@
 <script lang="ts">
+
 export default {
     data() {
         return {
@@ -15,8 +16,13 @@ export default {
 </script>
 
 <template>
-  <div>Hello, this is the setup page</div>
-  <button @click="clickHandler">Hello Button</button>
+  <h1 class="page-header">Setup</h1>
+  <div>
+    Welcome to the setup guide! Let's get you started.
+  </div>
+  <button solid @click="clickHandler">Get Started</button>
 </template>
 
-<style scoped></style>
+<style scoped>
+@import '@zanemds/styles/global.scss';
+</style>

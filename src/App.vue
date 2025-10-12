@@ -1,15 +1,24 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <router-view />
-  <!-- <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p> -->
-  <!-- <SetupGuide /> -->
+  <div class="workspace">
+    <div class="content"><router-view /></div>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+@import '@zanemds/styles/global.scss';
+
+.workspace {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  top: 0;
+  left: 0;
+}
+
+.content {
+  padding: 20px;
+}
+</style>
