@@ -1,23 +1,35 @@
-$primary-color: #49043B;
-$secondary-color: #0A4451;
+@use "sass:color";
+
+$primary-color: #49043b;
+$secondary-color: #0a4451;
 $foreground-color: #b5b5b5;
 $background-color: #1d1d1d;
 
 .workspace {
-    background-color: $background-color;
-    color: $foreground-color;
+  background-color: $background-color;
+  color: $foreground-color;
+}
+
+Card {
+  // background-color: color.adjust($background-color, $lightness: 5%);
+  background-color: pink;
 }
 
 button {
-    &[outline]{
-        background: transparent;
-        border-color: $primary-color;
-        background-color: transparent;
-        color: $foreground-color;
-    }
-    &[solid]{
-        background-color: $primary-color;
-        border-color: $primary-color;
-        color: $foreground-color;
-    }
+  //   background-color: color.adjust($primary-color, $lightness: 10%);
+  background-color: color.adjust($primary-color, $lightness: 5%);
+  border-color: color.adjust($primary-color, $lightness: 5%);
+  color: $foreground-color;
+
+  &[outline] {
+    background: transparent;
+    border-color: color.adjust($primary-color, $lightness: 10%);
+    background-color: transparent;
+    color: $foreground-color;
+  }
+
+  &:active{
+    background-color: color.adjust($primary-color, $lightness: -5%);
+    border-color: color.adjust($primary-color, $lightness: -5%);
+  }
 }

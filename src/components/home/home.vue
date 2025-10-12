@@ -7,7 +7,7 @@ export default {
     },
     setup() {
       const configurator = new ConfiguratorService();
-
+      configurator.checkConfiguration();
     }
 };
 

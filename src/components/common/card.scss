@@ -1,0 +1,11 @@
+@use "sass:color";
+@use "../../styles/theme.scss" as *;
+
+.card {
+  .card-title {
+    margin-top: 0;
+  }
+  border-radius: 5px;
+  background-color: color.adjust($background-color, $lightness: 5%);
+  padding: 20px;
+}

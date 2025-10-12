@@ -1,8 +1,11 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import SetupGuide from "./components/setup/setup-guide.vue";
+import Setup from "./components/setup/setup.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "./components/home/home.vue";
+import { gpgRoute, setupRoutes } from "./dal/models/route.model";
+import SetupWelcome from "./components/setup/pages/setup-welcome.vue";
+import SetupBridge from "./components/setup/pages/setup-bridge.vue";
 
 const app = createApp(App);
 
@@ -10,16 +13,20 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: "/",
-      redirect: "/home"
+      path: gpgRoute.root,
+      redirect: gpgRoute.home,
     },
     {
-      path: "/home",
-      component: Home
+      path: gpgRoute.home,
+      component: Home,
     },
     {
-      path: "/setup",
-      component: SetupGuide
+      path: gpgRoute.setup,
+      component: Setup,
+      children: [
+        { path: setupRoutes.WELCOME, component: SetupWelcome },
+        { path: setupRoutes.BRIDGE, component: SetupBridge },
+      ],
     },
   ],
 });

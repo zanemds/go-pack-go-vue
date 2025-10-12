@@ -1,15 +1,10 @@
 @forward './theme.scss';
 @forward './typography.scss';
 
-
-.page-header{
-    margin-top: 0;
-}
-
-
 button {
     margin: 10px 10px 10px 0;
-    border: 2px solid;
+    border-width: 2px;
+    border-style: solid;
     padding: 10px;
     border-radius: 8px;
 }

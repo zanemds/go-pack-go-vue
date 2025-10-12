@@ -3,3 +3,9 @@ export enum gpgRoute {
   setup = "/setup",
   home = "/home",
 }
+
+export enum setupRoutes {
+    WELCOME = "welcome",
+    BRIDGE = "bridge",
+    DETAILS = "details",
+}
