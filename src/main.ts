@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import SetupGuide from "./components/setup-guide.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "./components/home.vue";
+import Home from "./components/home/home.vue";
 
 const app = createApp(App);
 
