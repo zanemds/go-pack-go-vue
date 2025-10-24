@@ -11,8 +11,17 @@ $background-color: #1d1d1d;
 }
 
 Card {
-  // background-color: color.adjust($background-color, $lightness: 5%);
-  background-color: pink;
+  background-color: color.adjust($background-color, $lightness: 5%);
+}
+
+[icon]{
+    filter: invert(90%);
+}
+
+.demonstration-container {
+    &[primary-color] {
+        color: color.adjust($primary-color, $lightness: 20%);
+    }
 }
 
 button {

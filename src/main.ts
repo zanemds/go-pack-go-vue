@@ -6,6 +6,10 @@ import Home from "./components/home/home.vue";
 import { gpgRoute, setupRoutes } from "./dal/models/route.model";
 import SetupWelcome from "./components/setup/pages/setup-welcome.vue";
 import SetupBridge from "./components/setup/pages/setup-bridge.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+import { faHandPointRight, faHandPointUp, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 const app = createApp(App);
 
@@ -31,8 +35,12 @@ const router = createRouter({
   ],
 });
 
-app.use(router);
+const icons = [faHouse, faHandPointRight, faHandPointUp];
 
-// app.component("SetupGuide", SetupGuide);
+library.add(icons);
+
+app.component("font-awesome-icon", FontAwesomeIcon);
+
+app.use(router);
 
 app.mount("#app");
