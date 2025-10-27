@@ -1,0 +1,7 @@
+{
+  "bridgeConfigs": {
+    "IP": "192.168.86.46",
+    "token": "your_generated_token_here",
+    "deviceType": "go_pack_go#zanemds"
+  }
+}

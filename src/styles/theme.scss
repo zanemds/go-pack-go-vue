@@ -20,7 +20,7 @@ Card {
 
 .demonstration-container {
     &[primary-color] {
-        color: color.adjust($primary-color, $lightness: 20%);
+        color: color.adjust($primary-color, $lightness: 30%);
     }
 }
 
