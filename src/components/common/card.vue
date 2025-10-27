@@ -2,13 +2,16 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "Card",
+  name: 'Card',
   props: {
     title: {
       type: String,
       required: false,
     },
-    
+    subtitle: {
+      type: String,
+      required: false,
+    },
   },
 });
 </script>
@@ -16,11 +19,11 @@ export default defineComponent({
 <template>
   <div class="card">
     <h1 v-if="title" class="card-title">{{ title }}</h1>
+    <h2 v-if="subtitle" class="card-subtitle">{{ subtitle }}</h2>
     <slot></slot>
   </div>
 </template>
 
 <style scoped>
-@import "./card.scss";
-
+@import './card.scss';
 </style>

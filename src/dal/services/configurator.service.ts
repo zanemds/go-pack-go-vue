@@ -10,12 +10,16 @@ export class ConfiguratorService {
   ) as Configuration;
 
   constructor() {
-    axios.get('/src/assets/configurations/ui-context.json').then((response) => {
-      this.config = response.data.bridgeConfigs as Configuration;
-    });
+    // axios.get('/src/assets/configurations/ui-context.json').then((response) => {
+    //   this.config = response.data.bridgeConfigs as Configuration;
+    // });
   }
 
   public checkConfiguration(): void {
+    if (!this.config) {
+      this.navigateToSetup();
+      return;
+    }
     axios.get('/src/assets/configurations/ui-context.json').then((response) => {
       axios
         .get(`http://${this.config.IP}/api/${this.config.token}/lights`)
