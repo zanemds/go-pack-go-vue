@@ -1,25 +1,64 @@
-import type { Configuration } from '../models/configuration.model';
+import type { Configuration, ZoneType } from '../models/configuration.model';
 import { useRouter } from 'vue-router';
 import { gpgRoute, setupRoutes } from '../models/route.model';
 import axios from 'axios';
+import { storeKeyNames } from '../models/storage.model';
 export class ConfiguratorService {
   private router = useRouter();
 
-  private config: Configuration = JSON.parse(
-    localStorage.getItem('gpgConfig')
-  ) as Configuration;
+  //TODO decide where this comes from dynamically
+  private config: Configuration;
 
   constructor() {
-    // axios.get('/src/assets/configurations/ui-context.json').then((response) => {
-    //   this.config = response.data.bridgeConfigs as Configuration;
-    // });
+    const zoneName: string = localStorage.getItem(
+      storeKeyNames.zoneName
+    ) as string;
+    const zoneType: ZoneType = localStorage.getItem(
+      storeKeyNames.zoneType
+    ) as ZoneType;
+    const token: string = localStorage.getItem(storeKeyNames.token) as string;
+    const IP: string = localStorage.getItem(storeKeyNames.IP) as string;
+    const deviceType: string = localStorage.getItem(
+      storeKeyNames.deviceType
+    ) as string;
+    [zoneName, zoneType, token, IP, deviceType].some((item) => !item)
+      ? null
+      : (this.config = {
+          areaName: zoneName,
+          zoneType: zoneType,
+          deviceType: deviceType,
+          IP: IP,
+          token: token,
+        });
   }
 
   public checkConfiguration(): void {
+    const zoneName: string = localStorage.getItem(
+      storeKeyNames.zoneName
+    ) as string;
+    const zoneType: ZoneType = localStorage.getItem(
+      storeKeyNames.zoneType
+    ) as ZoneType;
+    const token: string = localStorage.getItem(storeKeyNames.token) as string;
+    const IP: string = localStorage.getItem(storeKeyNames.IP) as string;
+    const deviceType: string = localStorage.getItem(
+      storeKeyNames.deviceType
+    ) as string;
+    [zoneName, zoneType, token, IP, deviceType].some((item) => !item)
+      ? null
+      : (this.config = {
+          areaName: zoneName,
+          zoneType: zoneType,
+          deviceType: deviceType,
+          IP: IP,
+          token: token,
+        });
+
     if (!this.config) {
       this.navigateToSetup();
       return;
     }
+
     axios.get('/src/assets/configurations/ui-context.json').then((response) => {
       axios
         .get(`http://${this.config.IP}/api/${this.config.token}/lights`)
@@ -40,6 +79,12 @@ export class ConfiguratorService {
     return axios.get('https://discovery.meethue.com/', {
       withCredentials: false,
     });
+  }
+
+  public getGroups(): Promise<any> {
+    return axios.get(
+      `http://${this.config.IP}/api/${this.config.token}/groups`
+    );
   }
 
   public getConfiguredIP(): string {
@@ -64,6 +109,10 @@ export class ConfiguratorService {
     return this.config.token;
   }
 
+  public getConfigurations(): Configuration {
+    return this.config;
+  }
+
   public authorizeBridge(): Promise<any> {
     return axios.post(`http://${this.config.IP}/api`, {
       devicetype: this.config.deviceType,
@@ -76,5 +125,13 @@ export class ConfiguratorService {
         resolve();
       }, 1000);
     });
+  }
+
+  public setConfigs(zoneName: string, zoneType: string, token: string) {
+    localStorage.setItem(storeKeyNames.zoneName, zoneName);
+    localStorage.setItem(storeKeyNames.zoneType, zoneType);
+    localStorage.setItem(storeKeyNames.token, token);
+    localStorage.setItem(storeKeyNames.IP, this.config.IP);
+    localStorage.setItem(storeKeyNames.deviceType, this.config.deviceType);
   }
 }

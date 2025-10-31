@@ -13,6 +13,7 @@ export default {
       counter: 30,
       bridgeIP: '',
       authorized: false,
+      message: '',
       counter$: new BehaviorSubject<number>(30),
     };
   },
@@ -24,10 +25,18 @@ export default {
   mounted() {
     const configurator = new ConfiguratorService();
     configurator.getConfiguredIP$().then((ip) => {
+      if (configurator.getConfigurations().token) {
+        this.authorized = true;
+        this.message =
+          'Bridge already authorized, skipping authorization step.';
+        setTimeout(() => {
+          this.$router.push(setupRoutes.DETAILS);
+        }, 3000);
+      }
       this.bridgeIP = ip;
       useSubscription(
         interval(1000)
-          .pipe(filter((int) => this.counter > 0))
+          .pipe(filter((int) => this.counter > 0 && !this.authorized))
           .subscribe((value) => {
             this.counter -= 1;
             this.counter$.next(this.counter);
@@ -45,6 +54,11 @@ export default {
                 case 'success':
                   console.log('success authorizing bridge');
                   this.authorized = true;
+                  this.message = 'Bridge authorized successfully!';
+                  console.log('res', response);
+                  setTimeout(() => {
+                    this.$router.push(setupRoutes.DETAILS);
+                  }, 5000);
                   this.$router.push(setupRoutes.DETAILS);
                   break;
                 case 'error':
@@ -62,13 +76,17 @@ export default {
 </script>
 
 <template>
-  <Card title="Setup Bridge">
-    <div subtitle>
-      Find your bridge and press the Authorization button found on the bridge
-    </div>
+  <Card
+    title="Setup Bridge"
+    subtitle=" Find your bridge and press the Authorization button found on the bridge"
+  >
     <div v-if="bridgeIP">
-      <div>Attempting to authorize bridge at {{ bridgeIP }} ...</div>
-      <div>Checking in {{ counter }} seconds</div>
+      <div v-if="!authorized">
+        <div>Attempting to authorize bridge at {{ bridgeIP }} ...</div>
+        <div>Checking in {{ counter }} seconds</div>
+      </div>
+
+      <div v-else>{{ message }}</div>
     </div>
     <div class="demonstration-container" primary-color>
       <font-awesome-icon

@@ -19,7 +19,7 @@ export default defineComponent({
 <template>
   <div class="card">
     <h1 v-if="title" class="card-title">{{ title }}</h1>
-    <h2 v-if="subtitle" class="card-subtitle">{{ subtitle }}</h2>
+    <h3 v-if="subtitle" class="card-subtitle">{{ subtitle }}</h3>
     <slot></slot>
   </div>
 </template>

@@ -1,4 +1,4 @@
-@use "sass:color";
+@use 'sass:color';
 
 $primary-color: #49043b;
 $secondary-color: #0a4451;
@@ -14,14 +14,14 @@ Card {
   background-color: color.adjust($background-color, $lightness: 5%);
 }
 
-[icon]{
-    filter: invert(90%);
+[icon] {
+  filter: invert(90%);
 }
 
 .demonstration-container {
-    &[primary-color] {
-        color: color.adjust($primary-color, $lightness: 30%);
-    }
+  &[primary-color] {
+    color: color.adjust($primary-color, $lightness: 30%);
+  }
 }
 
 button {
@@ -29,6 +29,11 @@ button {
   background-color: color.adjust($primary-color, $lightness: 5%);
   border-color: color.adjust($primary-color, $lightness: 5%);
   color: $foreground-color;
+  &[disabled] {
+    background-color: grey;
+    border-color: grey;
+    cursor: not-allowed;
+  }
 
   &[outline] {
     background: transparent;
@@ -37,8 +42,17 @@ button {
     color: $foreground-color;
   }
 
-  &:active{
+  &:active {
     background-color: color.adjust($primary-color, $lightness: -5%);
     border-color: color.adjust($primary-color, $lightness: -5%);
+  }
+}
+
+select {
+  background-color: inherit;
+  border-color: $foreground-color;
+  color: $foreground-color;
+  option {
+    background-color: $background-color;
   }
 }

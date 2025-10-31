@@ -2,9 +2,14 @@
 @forward './typography.scss';
 
 button {
-    margin: 10px 10px 10px 0;
-    border-width: 2px;
-    border-style: solid;
-    padding: 10px;
-    border-radius: 8px;
+  margin: 10px 10px 10px 0;
+  border-width: 2px;
+  border-style: solid;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+select {
+  padding: 10px;
 }

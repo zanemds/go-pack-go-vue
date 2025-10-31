@@ -7,6 +7,6 @@ export interface Configuration {
 }
 
 export enum ZoneType {
-  ENTERTAINMENT = 'entertainment',
-  ROOM = 'room',
+  ENTERTAINMENT = 'Entertainment',
+  ROOM = 'Room',
 }
